@@ -17,14 +17,14 @@
 <script>
 import { currency } from '../currency'
 import { useProductsStore } from './compositions/products';
-import { useCart } from './compositions/cart';
+import { useCartStore } from './compositions/cart';
 import { toRefs } from 'vue';
 
 export default {
   setup () {
     const { products } = toRefs(useProductsStore());
 
-    const { addProductToCart } = useCart()
+    const { addProductToCart } = useCartStore()
 
     return {
       products,

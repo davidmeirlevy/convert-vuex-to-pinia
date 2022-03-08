@@ -1,7 +1,8 @@
 import { computed, ref, toRefs } from 'vue';
 import { useProductsStore } from './products';
+import { defineStore } from 'pinia';
 
-export function useCart() {
+export const useCartStore = defineStore('cart', function useCart() {
 	const checkoutStatus = ref(null);
 	const items = ref([]);
 
@@ -43,4 +44,4 @@ export function useCart() {
 	}
 
 	return { addProductToCart, checkoutStatus, cartProducts, cartTotalPrice }
-}
+});

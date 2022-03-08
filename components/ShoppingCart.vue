@@ -20,13 +20,14 @@
 <script>
 import { useStore } from 'vuex'
 import { currency } from '../currency'
-import { useCart } from './compositions/cart';
+import { useCartStore } from './compositions/cart';
+import { toRefs } from 'vue';
 
 export default {
 	setup() {
 		const store = useStore()
 
-		const { checkoutStatus, cartProducts, cartTotalPrice } = useCart()
+		const { checkoutStatus, cartProducts, cartTotalPrice } = toRefs(useCartStore())
 
 		const checkout = (products) => store.dispatch('cart/checkout', products)
 

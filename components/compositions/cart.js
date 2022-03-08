@@ -1,12 +1,12 @@
-import { computed, ref } from 'vue';
-import { useProducts } from './products';
+import { computed, ref, toRefs } from 'vue';
+import { useProductsStore } from './products';
 
 export function useCart() {
 	const checkoutStatus = ref(null);
 	const items = ref([]);
 
 	// TODO: products is just a composition!
-	const { products, decrementProductInventory } = useProducts()
+	const { products, decrementProductInventory } = toRefs(useProductsStore())
 
 	const cartProducts = computed(() => {
 		return items.value.map(({ id, quantity }) => {
@@ -39,7 +39,7 @@ export function useCart() {
 				cartItem.quantity++;
 			}
 		}
-		decrementProductInventory(product);
+		decrementProductInventory.value(product);
 	}
 
 	return { addProductToCart, checkoutStatus, cartProducts, cartTotalPrice }

@@ -1,7 +1,8 @@
 import { ref } from 'vue';
 import shop from '../../api/shop';
+import { defineStore } from 'pinia'
 
-export function useProducts() {
+export const useProductsStore = defineStore('products', function useProducts() {
 	const products = ref([]);
 
 	shop.getProducts(list => {
@@ -14,4 +15,4 @@ export function useProducts() {
 	}
 
 	return { products, decrementProductInventory }
-}
+})

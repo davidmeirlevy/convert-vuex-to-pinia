@@ -16,12 +16,13 @@
 
 <script>
 import { currency } from '../currency'
-import { useProducts } from './compositions/products';
+import { useProductsStore } from './compositions/products';
 import { useCart } from './compositions/cart';
+import { toRefs } from 'vue';
 
 export default {
   setup () {
-    const { products } = useProducts();
+    const { products } = toRefs(useProductsStore());
 
     const { addProductToCart } = useCart()
 

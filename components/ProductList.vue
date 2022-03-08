@@ -15,18 +15,15 @@
 </template>
 
 <script>
-import { useStore } from 'vuex'
 import { currency } from '../currency'
 import { useProducts } from './compositions/products';
+import { useCart } from './compositions/cart';
 
 export default {
   setup () {
-    const store = useStore()
-
     const { products } = useProducts();
 
-    const addProductToCart = (product) => store.dispatch('cart/addProductToCart', product)
-
+    const { addProductToCart } = useCart()
 
     return {
       products,

@@ -15,19 +15,18 @@
 </template>
 
 <script>
-import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { currency } from '../currency'
+import { useProducts } from './compositions/products';
 
 export default {
   setup () {
     const store = useStore()
 
-    const products = computed(() => store.state.products.all)
+    const { products } = useProducts();
 
     const addProductToCart = (product) => store.dispatch('cart/addProductToCart', product)
 
-    store.dispatch('products/getAllProducts')
 
     return {
       products,

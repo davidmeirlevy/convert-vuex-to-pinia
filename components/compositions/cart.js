@@ -10,7 +10,7 @@ export function useCart() {
 			const cartItem = items.value.find(item => item.id === product.id);
 			if (!cartItem) {
 				items.value.push({
-					id,
+					id: product.id,
 					quantity: 1
 				});
 			} else {

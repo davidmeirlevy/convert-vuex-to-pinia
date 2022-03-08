@@ -17,3 +17,16 @@ export default {
   components: { ProductList, ShoppingCart }
 }
 </script>
+<style>
+body {
+	background-color: black;
+	color: #fff;
+	font-size: 1.5em;
+}
+
+button {
+	font-size: 1.5em;
+	padding: 0.5em;
+	border-radius: 10px;
+}
+</style>

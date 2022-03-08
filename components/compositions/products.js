@@ -8,5 +8,10 @@ export function useProducts() {
 		products.value = list;
 	});
 
-	return { products }
+	function decrementProductInventory ({ id }) {
+		const product = products.value.find(product => product.id === id)
+		product.inventory--
+	}
+
+	return { products, decrementProductInventory }
 }

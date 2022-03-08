@@ -6,7 +6,7 @@ export function useCart() {
 	const items = ref([]);
 
 	// TODO: products is just a composition!
-	const { products } = useProducts()
+	const { products, decrementProductInventory } = useProducts()
 
 	const cartProducts = computed(() => {
 		return items.value.map(({ id, quantity }) => {
@@ -39,7 +39,7 @@ export function useCart() {
 				cartItem.quantity++;
 			}
 		}
-		// TODO: call decrementProductInventory
+		decrementProductInventory(product);
 	}
 
 	return { addProductToCart, checkoutStatus, cartProducts, cartTotalPrice }

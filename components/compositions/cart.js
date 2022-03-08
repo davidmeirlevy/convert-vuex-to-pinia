@@ -1,8 +1,30 @@
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useProducts } from './products';
 
 export function useCart() {
 	const checkoutStatus = ref(null);
 	const items = ref([]);
+
+	// TODO: products is just a composition!
+	const { products } = useProducts()
+
+	const cartProducts = computed(() => {
+		return items.value.map(({ id, quantity }) => {
+			const product = products.value.find(product => product.id === id)
+			return {
+				id: product.id,
+				title: product.title,
+				price: product.price,
+				quantity
+			}
+		})
+	});
+
+	const cartTotalPrice = computed(() => {
+		return cartProducts.value.reduce((total, product) => {
+			return total + product.price * product.quantity
+		}, 0)
+	})
 
 	function addProductToCart(product) {
 		checkoutStatus.value = null;
@@ -20,5 +42,5 @@ export function useCart() {
 		// TODO: call decrementProductInventory
 	}
 
-	return { addProductToCart }
+	return { addProductToCart, checkoutStatus, cartProducts, cartTotalPrice }
 }
